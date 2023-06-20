@@ -30,13 +30,12 @@ for now I have none and do not require one
 
 #### Features / Routes
 
-- Feature One: Details of feature
-- GET : `/hello` - specific route to hit
+- GET : grabs mock data from a json file and displays it on the page
 
 #### Tests
 
-- npm test
+- npm test (once they are created)
 
 #### UML
 
-Link to an image of the UML for your application and response to events
+![Alt text](assets/ComponentUI-Lab.png)
