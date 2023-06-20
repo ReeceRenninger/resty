@@ -21,6 +21,7 @@ class App extends React.Component {
     };
   }
 
+
   callApi = (requestParams) => {
     // mock output
     const data = {
@@ -32,6 +33,8 @@ class App extends React.Component {
     };
     this.setState({data, requestParams});
   }
+
+
 
   render() {
     return (
