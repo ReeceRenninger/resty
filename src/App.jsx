@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.scss';
 
+
 // Let's talk about using index.js and some other name in the component folder.
 // There's pros and cons for each way of doing this...
 // OFFICIALLY, we have chosen to use the Airbnb style guide naming convention. 
@@ -21,7 +22,6 @@ class App extends React.Component {
     };
   }
 
-
   callApi = (requestParams) => {
     // mock output
     const data = {
@@ -34,14 +34,12 @@ class App extends React.Component {
     this.setState({data, requestParams});
   }
 
-
-
   render() {
     return (
       <React.Fragment>
         <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
+        <div className='CRUD'>Request Method: {this.state.requestParams.method}</div>
+        <div className='CRUD'>URL: {this.state.requestParams.url}</div>
         <Form handleApiCall={this.callApi} />
         <Results data={this.state.data} />
         <Footer />

@@ -11,7 +11,7 @@ Today, we begin the first of a 4-Phase build of the RESTy application, written i
 ### Links and Resources
 
 - [GitHub Actions ci/cd](https://github.com/ReeceRenninger/resty/actions/new)
-- [front-end application](http://xyz.com) (when applicable)
+- [front-end application](https://tjczmm-3000.csb.app/) (deployed on sandbox)
 
 ### Collaborators
 
