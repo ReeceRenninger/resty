@@ -3,7 +3,7 @@ import React from 'react';
 import './Form.scss';
 
 
-function Form(){
+function Form(props){
   
   let handleSubmit = (e) => {
     e.preventDefault();
@@ -11,7 +11,7 @@ function Form(){
       method:'GET',
       url: 'https://pokeapi.co/api/v2/pokemon',
     };
-    this.props.handleApiCall(formData);
+    props.handleApiCall(formData);
   }
 
   return (
