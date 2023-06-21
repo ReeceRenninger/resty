@@ -1,8 +1,4 @@
-$backgroundColor: #394053;
-$primaryColor: #7CAE7A;
-$secondaryColor: #4E4A59;
-$tertiaryColor: #6E6362;
-$quaternaryColor: #839073;
+@import '../../color-style/color-scheme.scss';
 
 section {
     border: 1px solid black;
