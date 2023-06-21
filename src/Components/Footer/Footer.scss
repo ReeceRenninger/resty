@@ -3,3 +3,12 @@ $primaryColor: #7CAE7A;
 $secondaryColor: #4E4A59;
 $tertiaryColor: #6E6362;
 $quaternaryColor: #839073;
+
+
+footer {
+  background: $primaryColor;
+  border-top: 1px solid gray;
+  padding: 1em 3em;
+  margin: 0;
+  text-align: center;
+}
