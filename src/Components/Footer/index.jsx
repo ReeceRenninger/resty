@@ -4,7 +4,7 @@ import './Footer.scss';
 function Footer () {
   return(
     
-      <footer>&copy; Reece Renninger 2023</footer>
+      <footer data-testid='test-footer'>&copy; Reece Renninger 2023</footer>
     
   )
 }
