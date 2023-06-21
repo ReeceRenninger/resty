@@ -1,0 +1,11 @@
+@import '../../color-style/color-scheme.scss';
+
+header {
+  background: $secondaryColor;
+  border-bottom: 1px solid gray;
+  color: black;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: $quaternaryColor;
+}

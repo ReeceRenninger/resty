@@ -11,7 +11,7 @@ Today, we begin the first of a 4-Phase build of the RESTy application, written i
 ### Links and Resources
 
 - [GitHub Actions ci/cd](https://github.com/ReeceRenninger/resty/actions/new)
-- [front-end application](http://xyz.com) (when applicable)
+- [front-end application](https://tjczmm-3000.csb.app/) (deployed on sandbox)
 
 ### Collaborators
 
@@ -30,13 +30,73 @@ for now I have none and do not require one
 
 #### Features / Routes
 
-- Feature One: Details of feature
-- GET : `/hello` - specific route to hit
+- GET : grabs mock data from a json file and displays it on the page
 
 #### Tests
 
-- npm test
+- npm test (once they are created)
 
 #### UML
 
-Link to an image of the UML for your application and response to events
+![Alt text](assets/ComponentUI-Lab.png)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+# LAB - Class 27
+
+## Project: useState hooks
+
+### Author: Reece Renninger
+
+### Problem Domain  
+
+In phase 2, we will be receiving user input in preparation of connecting to live APIs, using the useState() hook in our functional components. In order to properly manage state with the useState hook, we will now convert <App /> to a functional component.
+
+The following user stories detail the major functionality for this phase of the project.
+
+    As a user, I want to enter the REST Method and URL to an API.
+    As a user, I want to see a summary of my request as well as results returned from an API request in my browser in a readable format.
+
+Application Flow:
+
+    User enters an API URL.
+    Chooses a REST Method.
+    Clicks the “Go” button.
+    Application fetches data from the URL given, with the method specified.
+    Displays the response headers and results separately.
+    Both headers and results should be “pretty printed” JSON.
+
+
+### Links and Resources
+
+- [GitHub Actions ci/cd](https://github.com/ReeceRenninger/resty/actions/new)
+- [front-end application](https://codesandbox.io/p/github/ReeceRenninger/resty/state?layout=%257B%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522rootPanelGroup%2522%253A%257B%2522direction%2522%253A%2522horizontal%2522%252C%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522id%2522%253A%2522ROOT_LAYOUT%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522EDITOR%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522panelType%2522%253A%2522TABS%2522%252C%2522id%2522%253A%2522clj664zld00fu2a6falthz3y1%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%252C%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522DEVTOOLS%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522panelType%2522%253A%2522TABS%2522%252C%2522id%2522%253A%2522clj664zld00fw2a6fc6gxhdof%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%255D%252C%2522sizes%2522%253A%255B50%252C50%255D%257D%252C%2522tabbedPanels%2522%253A%257B%2522clj664zld00fu2a6falthz3y1%2522%253A%257B%2522tabs%2522%253A%255B%257B%2522id%2522%253A%2522clj664zld00ft2a6fxdazyxo7%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522FILE%2522%252C%2522filepath%2522%253A%2522%252FREADME.md%2522%257D%255D%252C%2522id%2522%253A%2522clj664zld00fu2a6falthz3y1%2522%252C%2522activeTabId%2522%253A%2522clj664zld00ft2a6fxdazyxo7%2522%257D%252C%2522clj664zld00fw2a6fc6gxhdof%2522%253A%257B%2522tabs%2522%253A%255B%257B%2522id%2522%253A%2522clj664zld00fv2a6fm4a06ytj%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522TASK_PORT%2522%252C%2522taskId%2522%253A%2522start%2522%252C%2522port%2522%253A3000%252C%2522path%2522%253A%2522%252F%2522%257D%255D%252C%2522id%2522%253A%2522clj664zld00fw2a6fc6gxhdof%2522%252C%2522activeTabId%2522%253A%2522clj664zld00fv2a6fm4a06ytj%2522%257D%257D%252C%2522showDevtools%2522%253Atrue%252C%2522showSidebar%2522%253Atrue%252C%2522sidebarPanelSize%2522%253A15%257D) (deployed on sandbox)
+
+### Collaborators
+
+- Sir Ike on the daily
+
+### Setup
+
+#### `.env` requirements (where applicable)
+
+for now I have none and do not require one
+
+
+#### How to initialize/run your application (where applicable)
+
+- e.g. `npm start`
+
+#### How to use your library (where applicable)
+
+#### Features / Routes
+
+- GET : grabs mock data from a json file and displays it on the page
+
+#### Tests
+
+- npm test (once they are created)
+
+#### UML
+
+![Alt text](assets/day27LabUML.png)

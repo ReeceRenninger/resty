@@ -1,0 +1,11 @@
+@import '../../color-style/color-scheme.scss';
+
+
+
+footer {
+  background: $primaryColor;
+  border-top: 1px solid gray;
+  padding: 1em 3em;
+  margin: 0;
+  text-align: center;
+}
