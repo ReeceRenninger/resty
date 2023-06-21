@@ -39,7 +39,7 @@ class App extends React.Component {
       <React.Fragment>
         <Header />
         <div className='CRUD'>Request Method: {this.state.requestParams.method}</div>
-        <div className='CRUD'>URL: {this.state.requestParams.url}</div>
+        <div className='URL'>URL: {this.state.requestParams.url}</div>
         <Form handleApiCall={this.callApi} />
         <Results data={this.state.data} />
         <Footer />
