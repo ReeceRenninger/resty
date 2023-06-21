@@ -22,7 +22,7 @@ const App = () => {
         count: 2,
         results: [
           {name: 'squirtle', url: 'https://pokeapi.co/api/v2/pokemon/squirtle'},
-          {name: 'fake thing 2', url: 'http://fakethings.com/2'},
+          {name: 'blastoise', url: 'https://pokeapi.co/api/v2/pokemon/blastoise'},
         ],
       };
       setData(data);

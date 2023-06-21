@@ -12,10 +12,9 @@ function Results(props) {
           ? <div >LOADING....</div>
           : <pre>{props.data ?  <JSONPretty id="json-pretty" theme={JSONPrettyMon} data={props.data}/> : null}</pre> 
         }
-       
       </section>
     );
   
 }
-// JSON.stringify(props.data, undefined, 2)
+
 export default Results;

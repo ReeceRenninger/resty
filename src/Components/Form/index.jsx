@@ -32,10 +32,10 @@ const handleClick = (e) => {
             <button type="submit">GO!</button>
           </label>
           <label className="methods">
-            <span id="get" onClick={handleClick} style={{ backgroundColor : method === 'get' ? 'green' : 'grey'}}>GET</span>
-            <span id="post" onClick={handleClick} style={{ backgroundColor : method === 'post' ? 'orange' : 'grey'}}>POST</span>
-            <span id="put" onClick={handleClick} style={{ backgroundColor : method === 'put' ? 'teal' : 'grey'}}>PUT</span>
-            <span id="delete" onClick={handleClick} style={{ backgroundColor : method === 'delete' ? 'red' : 'grey'}}>DELETE</span>
+            <span id="get" data-testid='test-get' onClick={handleClick} style={{ backgroundColor : method === 'get' ? 'green' : 'grey'}}>GET</span>
+            <span id="post" data-testid='test-post' onClick={handleClick} style={{ backgroundColor : method === 'post' ? 'orange' : 'grey'}}>POST</span>
+            <span id="put" data-testid='test-put' onClick={handleClick} style={{ backgroundColor : method === 'put' ? 'teal' : 'grey'}}>PUT</span>
+            <span id="delete" data-testid='test-delete' onClick={handleClick} style={{ backgroundColor : method === 'delete' ? 'red' : 'grey'}}>DELETE</span>
           </label>
           {method === 'post' && <textarea onChange={(event) => setJson(event.target.value)}/>}
           {method === 'put' && <textarea onChange={(event) => setJson(event.target.value)}/>}
