@@ -28,8 +28,10 @@ const App = () => { // may convert to function component later to see bugs easie
 
   const callApi = (requestParams) => {
     setLoading(true); // gives a loading message
-    setRequestParams(requestParams);
-    setLoading(false);
+    setTimeout(() => {
+      setRequestParams(requestParams);
+      setLoading(false);
+    }, 500); 
   }
 
   //passing loading to Results to let it know when to display loading message
