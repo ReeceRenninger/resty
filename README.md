@@ -100,3 +100,68 @@ for now I have none and do not require one
 #### UML
 
 ![Alt text](assets/day27LabUML.png)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+# LAB - Class 28
+
+## Project: useEffect hooks
+
+### Author: Reece Renninger
+
+### Problem Domain  
+
+In phase 3, we will be connecting RESTy to live APIs, fetching and displaying remote data. Our primary focus will be to service GET requests.
+
+The following user stories detail the major functionality for this phase of the project.
+
+    As a user, I want to enter the URL to an API and issue a GET request so that I can retrieve it’s data.
+    As a user, I want to see the results returned from an API request in my browser in a readable format.
+
+Application Flow:
+
+    User enters an API URL.
+    Chooses a REST Method.
+    Clicks the “Go” button.
+    Application fetches data from the URL given, with the method specified.
+    Displays the response headers and results separately.
+    Both headers and results should be “pretty printed” JSON.
+
+
+
+### Links and Resources
+
+- [GitHub Actions ci/cd](https://github.com/ReeceRenninger/resty/actions/new)
+- [front-end application](https://codesandbox.io/p/github/ReeceRenninger/resty/effect-hook?layout=%257B%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522rootPanelGroup%2522%253A%257B%2522direction%2522%253A%2522horizontal%2522%252C%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522id%2522%253A%2522ROOT_LAYOUT%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522EDITOR%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522panelType%2522%253A%2522TABS%2522%252C%2522id%2522%253A%2522clj7qrcem008q2a6f7ona4l8y%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%252C%257B%2522type%2522%253A%2522PANEL_GROUP%2522%252C%2522direction%2522%253A%2522horizontal%2522%252C%2522id%2522%253A%2522DEVTOOLS%2522%252C%2522panels%2522%253A%255B%257B%2522type%2522%253A%2522PANEL%2522%252C%2522panelType%2522%253A%2522TABS%2522%252C%2522id%2522%253A%2522clj7qrcem008s2a6fllzuqpus%2522%257D%255D%252C%2522sizes%2522%253A%255B100%255D%257D%255D%252C%2522sizes%2522%253A%255B50%252C50%255D%257D%252C%2522tabbedPanels%2522%253A%257B%2522clj7qrcem008q2a6f7ona4l8y%2522%253A%257B%2522tabs%2522%253A%255B%257B%2522id%2522%253A%2522clj7qrcel008p2a6fwi043o2r%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522type%2522%253A%2522FILE%2522%252C%2522filepath%2522%253A%2522%252FREADME.md%2522%257D%255D%252C%2522id%2522%253A%2522clj7qrcem008q2a6f7ona4l8y%2522%252C%2522activeTabId%2522%253A%2522clj7qrcel008p2a6fwi043o2r%2522%257D%252C%2522clj7qrcem008s2a6fllzuqpus%2522%253A%257B%2522id%2522%253A%2522clj7qrcem008s2a6fllzuqpus%2522%252C%2522activeTabId%2522%253A%2522clj7qro5c00f22a6fsv3f8g2w%2522%252C%2522tabs%2522%253A%255B%257B%2522type%2522%253A%2522TASK_LOG%2522%252C%2522taskId%2522%253A%2522start%2522%252C%2522id%2522%253A%2522clj7qro5c00f22a6fsv3f8g2w%2522%252C%2522mode%2522%253A%2522permanent%2522%257D%252C%257B%2522type%2522%253A%2522TASK_PORT%2522%252C%2522taskId%2522%253A%2522start%2522%252C%2522port%2522%253A3000%252C%2522id%2522%253A%2522clj7qrscs00n12a6f5dyx9sws%2522%252C%2522mode%2522%253A%2522permanent%2522%252C%2522path%2522%253A%2522%252F%2522%257D%255D%257D%257D%252C%2522showDevtools%2522%253Atrue%252C%2522showSidebar%2522%253Atrue%252C%2522sidebarPanelSize%2522%253A15%257D) (deployed on sandbox)
+
+### Collaborators
+
+- Sir Ike & Sir Nicholas on the daily
+- Tony the GOAT
+
+
+### Setup
+
+#### `.env` requirements (where applicable)
+
+for now I have none and do not require one
+
+
+#### How to initialize/run your application (where applicable)
+
+- e.g. `npm start`
+
+#### How to use your library (where applicable)
+
+#### Features / Routes
+
+- GET : grabs mock data from a json file and displays it on the page
+
+#### Tests
+
+- npm test (once they are created)
+
+#### UML
+
+![Alt text](assets/day28LabUML.png)
