@@ -1,16 +1,17 @@
 import './App.scss';
 
-import { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
 import Results from './Components/Results';
+import History from './Components/History';
 import axios from 'axios';
 
 export const initialState = {
   data: null,
-  requestParams: {},
+  // requestParams: {},
   loading: false,
   history: [], // added for lab 29
 };
@@ -21,72 +22,63 @@ export const requestReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        requestParams: action.payload,
+        data: action.payload, //data was here but form doesnt send info back
       };
     case 'FINISH':
       return {
         ...state,
         loading: false,
-        data: action.payload,
-        history: [...state.history, state.requestParams], //copilot added this 
+        history: [...state.history], //copilot added this 
       }
-      //do we need a case for history?
+      case 'HISTORY':
+        return {
+          ...state,
+          ...state.history[action.payload],
+        }
     default:
       return state;
   }
 };
 
 
-const App = () => { // may convert to function component later to see bugs easier
+const App = () => { 
 
   const [state, dispatch] = useReducer(requestReducer, initialState)
-
-  const [data, setData] = useState(null);
+  
+  
   const [requestParams, setRequestParams] = useState({});
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    console.log('API data was grabbed');
     async function getData() {
-      if (requestParams.method === 'get') {
-        let response = await axios.get(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
-        setData(response.data.results);
+      console.log('reqParams has changed!');
+      let response = await axios.get(requestParams.url);
+      let action = {
+        type: 'FINISH',
+        payload: response.data,
+        setRequestParams: requestParams
       }
-      if (requestParams.method === 'post') {
-        let response = await axios.post(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
-        setData(response.data.results);
-      }
-      if (requestParams.method === 'put') {
-        let response = await axios.put(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
-        setData(response.data.results);
-      }
-      if (requestParams.method === 'delete') {
-        let response = await axios.delete(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
-        setData(response.data.results);
-      }
+      dispatch(action);
+      
     }
-    if (requestParams.url && requestParams.method) {
-      getData();
-    }
-
+    getData();
   }, [requestParams]);
 
+
   const callApi = (requestParams) => {
-    setLoading(true); // gives a loading message
-    setTimeout(() => {
-      setRequestParams(requestParams);
-      setLoading(false);
-    }, 500);
+    let action = {
+      type: 'START',
+      payload: requestParams
+    }
+    dispatch(action);
   }
 
-  //passing loading to Results to let it know when to display loading message
   return (
     <>
       <Header />
       <div data-testid='test-method' className='CRUD'>Request Method: {requestParams.method}</div>
-      <div data-testid='test-url' className='URL'>URL:{`https://pokeapi.co/api/v2/${requestParams.url}`}</div>
+      <div data-testid='test-url' className='URL'>URL:{requestParams.url}</div>
       <Form handleApiCall={callApi} />
-      <Results data={data} loading={loading} />
+      <History history={state.history} />
+      <Results data={state.data} loading={state.loading} />
       <Footer />
     </>
   );
