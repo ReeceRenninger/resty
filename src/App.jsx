@@ -11,9 +11,9 @@ import axios from 'axios';
 
 export const initialState = {
   data: null,
-  // requestParams: {},
   loading: false,
-  history: [], // added for lab 29
+  // results: null,
+  history: [],
 };
 
 export const requestReducer = (state = initialState, action) => {
@@ -21,67 +21,72 @@ export const requestReducer = (state = initialState, action) => {
     case 'START':
       return {
         ...state,
-        loading: true,
         data: action.payload, //data was here but form doesnt send info back
-      };
-    case 'FINISH':
+      }
+    case 'LOADING HANDLER':
       return {
         ...state,
-        loading: false,
-        history: [...state.history], //copilot added this 
+        loading: action.payload,
       }
-      case 'HISTORY':
-        return {
-          ...state,
-          ...state.history[action.payload],
-        }
+    case 'HISTORY':
+      return {
+        ...state,
+        history: state.history[action.payload],
+      }
     default:
       return state;
   }
 };
-
-
-const App = () => { 
-
-  const [state, dispatch] = useReducer(requestReducer, initialState)
   
-  
+
+const App = () => {
+
+  const [state, dispatch] = useReducer(requestReducer, initialState);
   const [requestParams, setRequestParams] = useState({});
+  const [results, setResults] = useState(null);
+
+const handleHistoryClick = (event) => {
+  setResults(event.results);
+};
+
   useEffect(() => {
-    async function getData() {
-      console.log('reqParams has changed!');
-      let response = await axios.get(requestParams.url);
-      let action = {
-        type: 'FINISH',
-        payload: response.data,
-        setRequestParams: requestParams
+    try {
+      dispatch({ type: 'LOADING HANDLER', payload: true });
+
+      async function getData() {
+        if (requestParams.method === 'get') {
+          let response = await axios.get(requestParams.url);
+          dispatch({ type: 'START', payload: response.data });
+          dispatch({ type: 'HISTORY', payload: response.data });
+        }
       }
-      dispatch(action);
-      
+      if (requestParams.method && requestParams.url) {
+        getData();
+      }
+      dispatch({ type: 'LOADING HANDLER', payload: false });
+    } catch (error) {
+      dispatch({ type: 'START', payload: 'NO DATA AVAIABLE' });
+      dispatch({ type: 'LOADING HANDLER', payload: false });
     }
-    getData();
+  
   }, [requestParams]);
 
 
-  const callApi = (requestParams) => {
-    let action = {
-      type: 'START',
-      payload: requestParams
-    }
-    dispatch(action);
-  }
+const callApi = (requestParams) => {
+  setRequestParams(requestParams);
+}
 
-  return (
-    <>
-      <Header />
-      <div data-testid='test-method' className='CRUD'>Request Method: {requestParams.method}</div>
-      <div data-testid='test-url' className='URL'>URL:{requestParams.url}</div>
-      <Form handleApiCall={callApi} />
-      <History history={state.history} />
-      <Results data={state.data} loading={state.loading} />
-      <Footer />
-    </>
-  );
+return (
+  <>
+    <Header />
+    <div data-testid='test-method' className='CRUD'>Request Method: {requestParams.method}</div>
+    <div data-testid='test-url' className='URL'>URL:{requestParams.url}</div>
+    <History handleHistoryClick={handleHistoryClick} history={state.history} />
+    <Form handleApiCall={callApi} />
+    <Results results={results} data={state.data} loading={state.loading} />
+    <Footer />
+  </>
+);
 
 }
 
