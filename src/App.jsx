@@ -13,25 +13,39 @@ const App = () => { // may convert to function component later to see bugs easie
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [loading, setLoading] = useState(false);
-
+  
   useEffect(() => {
     console.log('API data was grabbed');
     async function getData() {
-      let response = await axios.get(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to paste in a url directly on form submit
-      setData(response.data.results);
+      if (requestParams.method === 'get') {
+        let response = await axios.get(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
+        setData(response.data.results);
+      }
+      if (requestParams.method === 'post') {
+        let response = await axios.post(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
+        setData(response.data.results);
+      }
+      if (requestParams.method === 'put') {
+        let response = await axios.put(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
+        setData(response.data.results);
+      }
+      if (requestParams.method === 'delete') {
+        let response = await axios.delete(`https://pokeapi.co/api/v2/${requestParams.url}`); //requestParams.url if we want to access different endpoints at pokemon API, can update this to be more dynamic
+        setData(response.data.results);
+      }
     }
     if (requestParams.url && requestParams.method) {
       getData();
     }
-
+    
   }, [requestParams]);
-
+  
   const callApi = (requestParams) => {
     setLoading(true); // gives a loading message
     setTimeout(() => {
       setRequestParams(requestParams);
       setLoading(false);
-    }, 500); 
+    }, 500);
   }
 
   //passing loading to Results to let it know when to display loading message

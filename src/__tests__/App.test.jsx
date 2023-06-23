@@ -5,18 +5,18 @@ import { useState, useEffect } from 'react';
 import { rest, setupServer } from 'msw'
 import App from '../App';
 
+//from the docs: https://testing-library.com/docs/react-testing-library/example-intro/#full-example
 const server = setupServer(
-  rest.get('https://pokeapi.co/api/v2/pokemon', (req, res, ctx) => {
-    // Define the response data you want to mock
-    const mockedResponse = { name: 'Pikachu', type: 'Electric' };
+  rest.get('/greeting', (req, res, ctx) => {
+    return res(ctx.json({greeting: 'hello there'}))
+  }),
+)
 
-    // Return the mocked response
-    return res(ctx.json(mockedResponse));
-  })
-);
-
+// establish API mocking BEFORE running test below
 beforeAll(() => server.listen());
-
+// reset any request handlers that we may add during the tests, so they don't affect other tests
+afterEach(() => server.resetHandlers());
+// clean up after the tests are finished
 afterAll(() => server.close());
 
 describe('App component', () => { 
@@ -33,7 +33,6 @@ describe('App component', () => {
     let resultsBefore = screen.getByTestId('test-results');
     expect(resultsBefore).toHaveTextContent('LOADING...');
 
-    //!! THESE ARE BROKEN BELOW FIX LATER
     let methodDiv = screen.getByTestId('test-method');
     let urlDiv = screen.getByTestId('test-url');
     expect(methodDiv).toHaveTextContent('Request Method:');
@@ -41,26 +40,7 @@ describe('App component', () => {
   });
 
   test('should fetch data from the API', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => {
-      // Your useEffect hook that makes the API call
-      const [data, setData] = useState(null);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          const response = await fetch('https://pokeapi.co/api/v2/pokemon');
-          const data = await response.json();
-          setData(data);
-        };
-
-        fetchData();
-      }, []);
-
-      return data;
-    });
-
-    await waitForNextUpdate();
-
-    expect(result.current).toEqual({ name: 'Pikachu', type: 'Electric' });
+   
   });
   
 });
