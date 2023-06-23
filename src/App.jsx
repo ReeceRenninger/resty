@@ -1,6 +1,6 @@
 import './App.scss';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
