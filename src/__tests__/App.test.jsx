@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-// import { renderHook } from '@testing-library/react-hooks'; // this is not working
-import { useState, useEffect } from 'react';
-import { rest, setupServer } from 'msw'
+import { rest} from 'msw'
+import { setupServer} from 'msw/node'
 import App from '../App';
 
+//msw is trash, find a better way to mock API calls in the future myself
 //from the docs: https://testing-library.com/docs/react-testing-library/example-intro/#full-example
 const server = setupServer(
-  rest.get('/greeting', (req, res, ctx) => {
+  rest.get('/testGet', (req, res, ctx) => {
     return res(ctx.json({greeting: 'hello there'}))
   }),
 )
@@ -20,27 +20,28 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe('App component', () => { 
-  test('allows form use and renders expected results', () => {
+  test('allows form use and renders expected results', async () => {
     render(<App />);
     let urlInput = screen.getByTestId('test-url-input');
-    let postMethod = screen.getByTestId('test-post');
+    let getMethod = screen.getByTestId('test-get');
     let goButton = screen.getByTestId('test-button');
 
-    fireEvent.change(urlInput, { target: { value: 'https://pokeapi.co/api/v2/pokemon' } });
-    fireEvent.click(postMethod);
+    fireEvent.change(urlInput, { target: { value: '/testGet' } });
+    fireEvent.click(getMethod);
     fireEvent.click(goButton);
 
-    let resultsBefore = screen.getByTestId('test-results');
-    expect(resultsBefore).toHaveTextContent('LOADING...');
+    let pre = await screen.findByTestId('test-results');
+    expect(pre).toHaveTextContent('hello there');
+    // expect(resultsBefore).toHaveTextContent('LOADING...');
 
     let methodDiv = screen.getByTestId('test-method');
     let urlDiv = screen.getByTestId('test-url');
     expect(methodDiv).toHaveTextContent('Request Method:');
-    expect(urlDiv).toHaveTextContent('URL:');
+    expect(urlDiv).toHaveTextContent('/testGet');
   });
 
-  test('should fetch data from the API', async () => {
+  // test('should fetch data from the API', async () => {
    
-  });
+  // });
   
 });
