@@ -8,12 +8,43 @@ import Form from './Components/Form';
 import Results from './Components/Results';
 import axios from 'axios';
 
+export const initialState = {
+  data: null,
+  requestParams: {},
+  loading: false,
+  history: [], // added for lab 29
+};
+
+export const requestReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'START':
+      return {
+        ...state,
+        loading: true,
+        requestParams: action.payload,
+      };
+    case 'FINISH':
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+        history: [...state.history, state.requestParams], //copilot added this 
+      }
+      //do we need a case for history?
+    default:
+      return state;
+  }
+};
+
+
 const App = () => { // may convert to function component later to see bugs easier
+
+  const [state, dispatch] = useReducer(requestReducer, initialState)
 
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [loading, setLoading] = useState(false);
-  
+
   useEffect(() => {
     console.log('API data was grabbed');
     async function getData() {
@@ -37,9 +68,9 @@ const App = () => { // may convert to function component later to see bugs easie
     if (requestParams.url && requestParams.method) {
       getData();
     }
-    
+
   }, [requestParams]);
-  
+
   const callApi = (requestParams) => {
     setLoading(true); // gives a loading message
     setTimeout(() => {
