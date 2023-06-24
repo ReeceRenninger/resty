@@ -208,7 +208,6 @@ Application Flow:
 
 for now I have none and do not require one
 
-
 #### How to initialize/run your application (where applicable)
 
 - e.g. `npm start`
