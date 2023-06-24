@@ -12,7 +12,6 @@ import axios from 'axios';
 export const initialState = {
   data: null,
   loading: false,
-  // results: null,
   history: [],
 };
 
@@ -21,7 +20,7 @@ export const requestReducer = (state = initialState, action) => {
     case 'START':
       return {
         ...state,
-        data: action.payload, //data was here but form doesnt send info back
+        data: action.payload, //data was here but form doesn't send info back
       }
     case 'LOADING HANDLER':
       return {
@@ -31,7 +30,7 @@ export const requestReducer = (state = initialState, action) => {
     case 'HISTORY':
       return {
         ...state,
-        history: state.history[action.payload],
+        history: [...state.history, action.payload],
       }
     default:
       return state;
@@ -43,11 +42,10 @@ const App = () => {
 
   const [state, dispatch] = useReducer(requestReducer, initialState);
   const [requestParams, setRequestParams] = useState({});
-  const [results, setResults] = useState(null);
 
-const handleHistoryClick = (event) => {
-  setResults(event.results);
-};
+// const handleHistoryClick = (event) => {
+//   setResults(event[0].results);
+// };
 
   useEffect(() => {
     try {
@@ -57,7 +55,9 @@ const handleHistoryClick = (event) => {
         if (requestParams.method === 'get') {
           let response = await axios.get(requestParams.url);
           dispatch({ type: 'START', payload: response.data });
-          dispatch({ type: 'HISTORY', payload: response.data });
+          let historyData = [requestParams, response.data];
+        
+          dispatch({ type: 'HISTORY', payload: historyData });
         }
       }
       if (requestParams.method && requestParams.url) {
@@ -81,9 +81,9 @@ return (
     <Header />
     <div data-testid='test-method' className='CRUD'>Request Method: {requestParams.method}</div>
     <div data-testid='test-url' className='URL'>URL:{requestParams.url}</div>
-    <History handleHistoryClick={handleHistoryClick} history={state.history} />
+    <History history={state.history} />
     <Form handleApiCall={callApi} />
-    <Results results={results} data={state.data} loading={state.loading} />
+    <Results data={state.data} loading={state.loading} />
     <Footer />
   </>
 );
