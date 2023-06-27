@@ -1,13 +1,12 @@
 import './App.scss';
 
 import React, { useState, useEffect, useReducer } from 'react';
-
+import axios from 'axios';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
-import Results from './Components/Results';
 import History from './Components/History';
-import axios from 'axios';
+import Results from './Components/Results';
 
 export const initialState = {
   data: null,
@@ -17,20 +16,21 @@ export const initialState = {
 
 export const requestReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'START':
-      return {
-        ...state,
-        data: action.payload, //data was here but form doesn't send info back
-      }
     case 'LOADING HANDLER':
       return {
         ...state,
         loading: action.payload,
       }
-    case 'HISTORY':
+    case 'SET-DATA':
       return {
         ...state,
-        history: [...state.history, action.payload],
+        data: action.payload.results, //added.results
+        history: [...state.history, {...action.payload.requestParams, data: action.payload.results}]
+      }
+    case 'DISPLAY-HISTORY':
+      return {
+        ...state,
+        data: state.history[action.payload],
       }
     default:
       return state;
@@ -43,9 +43,13 @@ const App = () => {
   const [state, dispatch] = useReducer(requestReducer, initialState);
   const [requestParams, setRequestParams] = useState({});
 
-// const handleHistoryClick = (event) => {
-//   setResults(event[0].results);
-// };
+const displayHistory = (index) => {
+  const action = {
+    type: 'DISPLAY-HISTORY',
+    payload: index,
+  }
+  dispatch(action);
+};
 
   useEffect(() => {
     try {
@@ -54,18 +58,19 @@ const App = () => {
       async function getData() {
         if (requestParams.method === 'get') {
           let response = await axios.get(requestParams.url);
-          dispatch({ type: 'START', payload: response.data });
-          let historyData = [requestParams, response.data];
+          dispatch({ type: 'SET-DATA', payload: response.data });
+          // let historyData = [requestParams, response.data];
         
-          dispatch({ type: 'HISTORY', payload: historyData });
+          // dispatch({ type: 'HISTORY', payload: historyData });
         }
       }
       if (requestParams.method && requestParams.url) {
         getData();
       }
       dispatch({ type: 'LOADING HANDLER', payload: false });
+
     } catch (error) {
-      dispatch({ type: 'START', payload: 'NO DATA AVAIABLE' });
+      dispatch({ type: 'SET-DATA', payload: 'NO DATA AVAIABLE' });
       dispatch({ type: 'LOADING HANDLER', payload: false });
     }
   
@@ -81,7 +86,7 @@ return (
     <Header />
     <div data-testid='test-method' className='CRUD'>Request Method: {requestParams.method}</div>
     <div data-testid='test-url' className='URL'>URL:{requestParams.url}</div>
-    <History history={state.history} />
+    <History history={state.history} displayHistory={displayHistory} />
     <Form handleApiCall={callApi} />
     <Results data={state.data} loading={state.loading} />
     <Footer />

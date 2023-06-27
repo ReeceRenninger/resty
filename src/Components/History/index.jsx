@@ -1,36 +1,20 @@
-// import React from 'react';
-
-// const History = (props) => {
-//   // const handleHistoryItemClick = (event) => {
-//   //   // Call the callback function passed from the parent component (App.js)
-//   //   props.handleHistoryClick(event);
-//   // };
-//   const handleHistoryItemClick = (event) => {
-//     props.handleHistoryClick(event[0].results);
-//   };
-
-//   return (
-//     <>
-//       <ul>
-//         {props.history.map((event, index) => (
-//           <li key={index} onClick={() => (event[0].results)}>
-//             {event[0].url}
-//           </li>
-//         ))}
-//       </ul>
-//     </>
-//   );
-// };
-
-// // // export default History;
 const History = (props) => {
-  console.log(props.history);
+  const { history, displayHistory } = props;
+// record.method and url are not defined for some reason, might be how I am passing data down to component
   return (
     <>
       <ul>
-        {props.history.map((event, index) => (
-          <li key={index}>{event[0].url}</li>
-          ))}
+        {
+          history.length ?
+            history.map((record, index) => (
+              <li key={`history-${index}`}>
+                <button onClick={() => displayHistory(index)}>
+                  {record.method}: {record.url}
+                </button>
+              </li>
+            ))
+            : ''
+        }
       </ul>
     </>
   );
